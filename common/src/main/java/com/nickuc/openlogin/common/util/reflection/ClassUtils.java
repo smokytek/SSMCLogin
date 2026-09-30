@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright © 2020 - 2026 - OpenLogin Contributors
+ * Copyright © 2026 - OpenLogin Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,23 +22,46 @@
  * SOFTWARE.
  */
 
-package com.nickuc.openlogin.common.util;
+package com.nickuc.openlogin.common.util.reflection;
+
+import javax.annotation.Nullable;
 
 public class ClassUtils {
 
-    /**
-     * Checks if a class exists.
-     *
-     * @param clasz the class to check
-     * @return true if exists
-     */
-    public static boolean exists(String clasz) {
+    public static boolean exists(String clasz, String... classes) {
+        return getClass(clasz, classes) != null;
+    }
+
+    public static boolean methodExists(Class<?> clasz, String methodName, Class<?>... classes) {
         try {
-            Class.forName(clasz);
+            clasz.getDeclaredMethod(methodName, classes);
             return true;
-        } catch (ClassNotFoundException ignored) {
+        } catch (NoSuchMethodException e) {
             return false;
         }
     }
 
+    public static boolean fieldExists(Class<?> clasz, String fieldName) {
+        try {
+            clasz.getDeclaredField(fieldName);
+            return true;
+        } catch (NoSuchFieldException e) {
+            return false;
+        }
+    }
+
+    @Nullable
+    public static Class<?> getClass(String clasz, String... classes) {
+        try {
+            return Class.forName(clasz);
+        } catch (ClassNotFoundException | NoClassDefFoundError e) {
+            for (String tmp : classes) {
+                try {
+                    return Class.forName(tmp);
+                } catch (ClassNotFoundException | NoClassDefFoundError ignored) {
+                }
+            }
+            return null;
+        }
+    }
 }

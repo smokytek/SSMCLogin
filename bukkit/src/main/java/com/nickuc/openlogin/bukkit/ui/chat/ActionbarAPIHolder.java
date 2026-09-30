@@ -24,6 +24,7 @@
 
 package com.nickuc.openlogin.bukkit.ui.chat;
 
+import com.nickuc.openlogin.bukkit.ui.chat.impl.PacketActionbarImpl;
 import com.nickuc.openlogin.bukkit.ui.chat.impl.SpigotActionbarImpl;
 
 public class ActionbarAPIHolder {
@@ -34,7 +35,13 @@ public class ActionbarAPIHolder {
         try {
             api = new SpigotActionbarImpl();
         } catch (ReflectiveOperationException ignored) {
-            // Spigot Actionbar API is not available, fall back to the default no-op implementation
+            // Spigot Actionbar API is not available
+        }
+
+        try {
+            if (api == null) api = new PacketActionbarImpl();
+        } catch (ReflectiveOperationException ignored) {
+            // Packet Actionbar API is not available, fall back to the default no-op implementation
         }
 
         if (api == null) {

@@ -24,7 +24,7 @@
 
 package com.nickuc.openlogin.common.security.filter;
 
-import com.nickuc.openlogin.common.util.ClassUtils;
+import com.nickuc.openlogin.common.util.reflection.ClassUtils;
 import lombok.NonNull;
 
 import java.util.HashSet;

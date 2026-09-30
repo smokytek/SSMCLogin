@@ -5,6 +5,7 @@ dependencies {
     implementation 'com.tcoded:FoliaLib:0.3.3'
 
     compileOnly 'org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT'
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
 }
 
 processResources {
