@@ -1,0 +1,24 @@
+name: SSMCLogin preview
+on:
+  push:
+    paths: ['ssmc/**', '.github/workflows/ssmclogin.yml']
+  pull_request:
+    paths: ['ssmc/**', '.github/workflows/ssmclogin.yml']
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@v4
+      - run: bash gradlew -p ssmc build --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SSMCLogin-development-preview
+          path: |
+            ssmc/paper/build/libs/*-dev.jar
+            ssmc/velocity/build/libs/*-dev.jar
+            ssmc/core/build/reports/tests/test/

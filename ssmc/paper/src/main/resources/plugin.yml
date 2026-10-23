@@ -1,0 +1,11 @@
+name: SSMCLogin
+version: 0.1.0-dev
+main: it.ssmc.login.paper.SSMCPaper
+api-version: '1.21'
+softdepend: [floodgate]
+commands:
+  ssmclink:
+    description: Collega il tuo account Bedrock al portale
+  login:
+    aliases: [l]
+    description: Accedi con la password di gioco di ssmc.it
