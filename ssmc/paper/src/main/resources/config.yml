@@ -1,0 +1,5 @@
+# standalone oppure proxy-guard (richiesto su ogni backend Velocity).
+mode: standalone
+portal-url: https://ssmc.it/api/minecraft/resolve
+# Le chiavi si leggono dall'ambiente: SSMCLOGIN_API_KEY e SSMCLOGIN_PROXY_KEY.
+login-timeout-seconds: 90

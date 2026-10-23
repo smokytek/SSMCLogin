@@ -1,0 +1,9 @@
+apply plugin: 'com.gradleup.shadow'
+dependencies {
+    implementation project(':core')
+    compileOnly 'com.velocitypowered:velocity-api:3.4.0-SNAPSHOT'
+    annotationProcessor 'com.velocitypowered:velocity-api:3.4.0-SNAPSHOT'
+    compileOnly 'org.geysermc.floodgate:api:2.2.4-SNAPSHOT'
+}
+shadowJar { archiveBaseName = 'SSMCLogin-Velocity'; archiveClassifier = ''; relocate 'com.google.gson', 'it.ssmc.login.libs.gson' }
+assemble.dependsOn shadowJar
